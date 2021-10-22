@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.CoreMatchers.is;
 
 //3 - Class
 public class Pet {
@@ -41,6 +43,10 @@ public class Pet {
         .then()
                 .log().all()
                 .statusCode(200)
+                .body("name", is("Atena"))
+                .body("status", is("available"))
+                .body("category.name", is("AX2345LORT"))
+                .body("tags.name", contains("data"))
         ;
 
     }
